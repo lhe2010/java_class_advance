@@ -12,6 +12,7 @@ public class User {
 	}
 
 	void printAccount() {
+		System.out.printf("UserName : %s\n", name);
 		if(accCount == 0) {
 			System.out.printf("아직 %s고객님은 계좌를 개설하지 않으셨네요.\n", name);
 		} else {
@@ -19,4 +20,5 @@ public class User {
 				acc.printOwnAccount();
 		}
 	}
+
 }
