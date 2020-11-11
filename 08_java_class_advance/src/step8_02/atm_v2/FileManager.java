@@ -125,8 +125,8 @@ public class FileManager {
 			}
 			else {
 				um.setDummy();
-				setData();
-				save();
+				setData(); // save()에 이미 있지 않나??? ******
+				save(); 
 			}
 			
 		} catch (Exception e) {
