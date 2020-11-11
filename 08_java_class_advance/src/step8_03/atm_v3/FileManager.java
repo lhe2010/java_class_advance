@@ -17,7 +17,6 @@ public class FileManager {
 	String fileName = "atmData.txt";
 	UserManager userManager = UserManager.getInstance();
 	
-	
 	boolean loadData() {
 		
 		boolean isFinish = false;
@@ -84,7 +83,6 @@ public class FileManager {
 		
 	}
 	
-	
 	void saveData() {
 			
 		if (userManager.userCount == 0) return;
@@ -128,6 +126,4 @@ public class FileManager {
 			if (fw != null) {try {fw.close();} catch (IOException e) {}}
 		}
 	}
-
-	
 }

@@ -12,25 +12,18 @@ public class UserManager {
 	int userCount;
 	int identifier = -1;
 	
-	
 	void printAllUserInfo() {
-		
 		System.out.println("아이디\t패스워드\t계좌정보");
-		for (int i=0; i<userCount; i++) {
+		for (int i=0; i<userCount; i++) 
 			userList[i].printOneUserAllAccounts();
-		}
 		System.out.println("--------------------------");
-		
 	}
 	
-	
 	void setDummy() {
-		
 		userCount = 5;
 		userList = new User[userCount];
-		for (int i=0; i<userCount; i++) {
+		for (int i=0; i<userCount; i++) 
 			userList[i] = new User();
-		}
 				
 		String[] a = {"a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k"};
 		String[] b = {"l", "b", "c", "m", "e", "f", "g", "n", "i", "p", "k"};
@@ -63,14 +56,10 @@ public class UserManager {
 			
 			userList[i].password = pw;
 		}
-		
 		System.out.println("[메세지]더미 파일이 추가되었습니다.\n");
-		
 	}
 
-	
 	int checkId(String id) {
-		
 		int check = -1;
 		for (int i=0; i<userCount; i++) {
 			if (userList[i].id.equals(id)) {
@@ -78,9 +67,7 @@ public class UserManager {
 			}
 		}
 		return check;
-		
 	}
-	
 	
 	void joinUser() {
 		
@@ -99,29 +86,24 @@ public class UserManager {
 		if (userCount == 0) {
 			userList = new User[1];
 			userList[0] = new User(id, password);
-		}
-		else if (userCount > 0) {
+		} else if (userCount > 0) {
 			User[] temp = userList;
 			
 			userList = new User[userCount + 1];
-			for (int i=0; i<userCount; i++) {
+			for (int i=0; i<userCount; i++) 
 				userList[i] = temp[i];
-			}
 			
 			userList[userCount] = new User(id, password);
 			
 			temp = null;
 		}
-		
 		userCount++;
 		System.out.println("[메세지]회원가입을 완료하였습니다.\n");
 		
 		FileManager.getInstance().saveData();
 		
 		printAllUserInfo();
-		
 	}
-	
 	
 	void leaveUser() {
 		
@@ -144,9 +126,7 @@ public class UserManager {
 		System.out.println("[메세지]탈퇴되었습니다.\n");
 		logoutUser();
 		FileManager.getInstance().saveData();
-				
 	}
-	
 	
 	void loginUser() {
 		
@@ -157,75 +137,45 @@ public class UserManager {
 		String password = ATM.scan.next();
 		
 		for (int i=0; i<userCount; i++) {
-			if (userList[i].id.equals(id) && userList[i].password.equals(password)) {
+			if (userList[i].id.equals(id) && userList[i].password.equals(password)) 
 				identifier = i;
-			}
 		}
 			
-		if (identifier == -1) {
+		if (identifier == -1) 
 			System.out.println("[메세지]아이디와 패스워드가 틀렸습니다.\n");
-		}
 		else {
 			System.out.println("[메세지]" + userList[identifier].id + "님, 환영합니다.\n");
 			afterloginMenu();
 		}
-		
 	}
-	
 	
 	void logoutUser() {
 		identifier = -1;
 		System.out.println("[메세지]로그아웃되었습니다.\n");
 	}
 	
-	
 	void afterloginMenu() {
 		
 		while (true) {
-			
 			System.out.println("[" + userList[identifier].id + "님, 로그인]");
 			System.out.println("[1]계좌생성 [2]입금하기 [3]출금하기 [4]이체하기 [5]계좌조회 "
 					+ "[6]계좌삭제 [7]회원탈퇴 [0]뒤로가기");
 			System.out.print("메뉴를 선택하세요 : ");
 			int choice = ATM.scan.nextInt();
 			
-			if (choice == 1)  {
-				AccountManager.getInstance().createAccount(); 
-			}
-			else if (choice == 2) {
-				AccountManager.getInstance().income(); 
-			}
-			else if (choice == 3) {
-				AccountManager.getInstance().outcome();
-			}
-			else if (choice == 4) {
-				AccountManager.getInstance().transfer(); 
-			}
-			else if (choice == 5) {
-				AccountManager.getInstance().lookupAcc(); 
-			}
-			else if (choice == 6) {
-				AccountManager.getInstance().deleteAcc(); 
-			}
+			if (choice == 1)  		AccountManager.getInstance().createAccount(); 
+			else if (choice == 2) 	AccountManager.getInstance().income(); 
+			else if (choice == 3) 	AccountManager.getInstance().outcome();
+			else if (choice == 4) 	AccountManager.getInstance().transfer(); 
+			else if (choice == 5) 	AccountManager.getInstance().lookupAcc(); 
+			else if (choice == 6) 	AccountManager.getInstance().deleteAcc(); 
 			else if (choice == 7) {
 				leaveUser();
 				break;
-			}
-			else if (choice == 0) {
+			} else if (choice == 0) {
 				logoutUser();
 				break; 
 			}
-			
 		}
-		
 	}
 }
-
-
-
-
-
-
-
-
-

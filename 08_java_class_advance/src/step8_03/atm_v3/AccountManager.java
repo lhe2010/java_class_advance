@@ -1,6 +1,5 @@
 package step8_03.atm_v3;
 
-
 public class AccountManager {
 
 	private AccountManager() {}
@@ -12,7 +11,6 @@ public class AccountManager {
 	UserManager userManager = UserManager.getInstance();
 	
 	void createAccount() {
-		
 		User loginUser = userManager.userList[userManager.identifier];
 		
 		if (loginUser.accCount == 3) {
@@ -22,14 +20,12 @@ public class AccountManager {
 		
 		if (loginUser.accCount == 0) {
 			loginUser.accList = new Account[loginUser.accCount + 1];
-		} 
-		else if (loginUser.accCount  > 0) {
+		} else if (loginUser.accCount  > 0) {
 			Account[] temp = loginUser.accList;
 			
 			loginUser.accList = new Account[loginUser.accCount + 1];
-			for(int i=0; i<loginUser.accCount; i++) {
+			for(int i=0; i<loginUser.accCount; i++) 
 				loginUser.accList[i] = temp[i];
-			}
 			temp = null;
 		}
 		loginUser.accList[loginUser.accCount] = new Account();
@@ -42,30 +38,23 @@ public class AccountManager {
 		System.out.println("[메세지]계좌가 생성되었습니다.\n");
 		
 		FileManager.getInstance().saveData();
-		
 	}
-	
 	
 	int showAccList(String msg) {
 		
 		int loginAccIndex = -1;
-
 		User loginUser = userManager.userList[userManager.identifier];
 		
 		if (loginUser.accCount > 0) {
-			for (int i=0; i<loginUser.accCount; i++) {
+			for (int i=0; i<loginUser.accCount; i++) 
 				System.out.println("[" + (i+1) + "]" + loginUser.accList[i].number);
-			}
 			
 			System.out.print("[" + msg + "]내 계좌를 메뉴에서 선택하세요 : ");
 			loginAccIndex = ATM.scan.nextInt();
 			loginAccIndex--;
 		}
-		
 		return loginAccIndex;
-		
 	}
-	
 	
 	void income() {
 		
@@ -82,9 +71,7 @@ public class AccountManager {
 		System.out.println("[메세지]입금을 완료하였습니다.\n");
 		
 		FileManager.getInstance().saveData();
-		
 	}
-	
 	
 	void outcome() {
 		
@@ -101,46 +88,31 @@ public class AccountManager {
 			System.out.println("[메세지]계좌잔액이 부족합니다.\n");
 			return;
 		}
-		
 		userManager.userList[userManager.identifier].accList[loginAccIndex].money -= money;
 		System.out.println("[메세지]출금을 완료하였습니다.\n");
 		
 		FileManager.getInstance().saveData();
-		
 	}
-	
 	
 	int checkAcc(String transAccount) {
-		
 		int check = -1;
-		for (int i=0; i<userManager.userList.length; i++) {
-			if (userManager.userList[i].accList != null) {
-				for (int j=0; j<userManager.userList[i].accCount; j++) {
-					if (transAccount.equals(userManager.userList[i].accList[j].number)) {
+		for (int i=0; i<userManager.userList.length; i++) 
+			if (userManager.userList[i].accList != null) 
+				for (int j=0; j<userManager.userList[i].accCount; j++) 
+					if (transAccount.equals(userManager.userList[i].accList[j].number)) 
 						check = i;
-					}
-				}
-			}
-		}
 		return check;
-		
 	}
 	
-	
 	int getAccIndex(int transUserIndex, String transAccount) {
-		
 		int accIndex = 0;
 		
 		for (int i=0; i<userManager.userList[transUserIndex].accCount; i++) {
-			if (transAccount.equals(userManager.userList[transUserIndex].accList[i].number)) {
+			if (transAccount.equals(userManager.userList[transUserIndex].accList[i].number)) 
 				accIndex = i;
-			}
 		}
-		
 		return accIndex;
-		
 	}
-	
 	
 	void transfer() {
 		
@@ -176,14 +148,11 @@ public class AccountManager {
 		FileManager.getInstance().saveData();
 	}
 	
-	
 	void lookupAcc() {
 		userManager.userList[userManager.identifier].printOneUserAllAccounts();
 	}
-
 	
 	void deleteAcc() {
-		
 		int loginAccIndex = showAccList("삭제");
 		if (loginAccIndex == -1) {
 			System.out.println("[메세지]계좌를 먼저 생성해주세요.\n");
@@ -213,8 +182,5 @@ public class AccountManager {
 		System.out.println("[메세지]계좌삭제를 완료하였습니다.\n");
 		
 		FileManager.getInstance().saveData();
-	
 	}
-	
-	
 }

@@ -16,12 +16,9 @@ public class ATM {
 			UserManager.getInstance().setDummy();
 			FileManager.getInstance().saveData();
 		}
-		
 	}
 	
-	
 	void showMenu() {
-		
 		while(true) {
 			
 			printAllDataByAllUser();
@@ -34,34 +31,20 @@ public class ATM {
 			if		(choice == 1) 	join(); 
 			else if (choice == 2) 	login(); 
 			else if (choice == 0) 	break;
-			
 		}
-		
 	}
-	
 	
 	void printAllDataByAllUser() {
-		
 		UserManager.getInstance().printAllUserInfo();
-		
 	}
-	
 	
 	void login() { 
-		
 		UserManager.getInstance().loginUser();
-		
 	}
-	
 	
 	void join() { 
-		
 		UserManager.getInstance().joinUser(); 
-		
 	}
-	
-	
-	
 }
 
 
