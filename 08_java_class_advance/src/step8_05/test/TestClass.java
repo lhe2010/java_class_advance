@@ -1,3 +1,4 @@
+// 2020-11-16 월 3교시 17:00-17:24
 package step8_05.test;
 import java.util.ArrayList;
 
@@ -22,6 +23,14 @@ class Member {
 		this.grade = grade;
 		this.city = city;
 	}
+	
+	int getCustno() {
+		return this.custno;
+	}
+	
+	String getcustname() {
+		return this.custname;
+	}
 }
 
 class Money {
@@ -45,7 +54,6 @@ class Money {
 		this.pcode = pcode;
 		this.sdate = sdate;
 	}
-	
 }
 
 class Manager{
@@ -74,6 +82,44 @@ class Manager{
 		moneyList.add(new Money(100004, 20160010, 3000, 1, 3000, "A007", "20160106"));
 		
 	}
+	
+	void printSumOfPrice() {
+		int[][] tempArr = new int[memberList.size()][2];
+		for (int i = 0; i < memberList.size(); i++) {
+			tempArr[i][0] = memberList.get(i).getCustno();
+//			int total = 0;
+			for (int j = 0; j < moneyList.size(); j++) {
+				if(tempArr[i][0] == moneyList.get(j).custno) {
+					tempArr[i][1] += moneyList.get(j).price;
+				}
+				
+			}
+			// print
+//			if(tempArr[i][1] != 0) {
+//				System.out.printf("%d\t%s\t%d\n", tempArr[i][0], memberList.get(i).getcustname(), tempArr[i][1]);
+//				System.out.println("--------------------------------");
+//			}
+		}
+		// 내림차순
+		int j = 0;
+		while(j != tempArr.length) {
+			int max = tempArr[0][1];
+			int maxIdx = 0;
+
+			for (int i = 0; i < tempArr.length; i++) {
+				if( max < tempArr[i][1]) {
+					maxIdx = i;
+					max = tempArr[i][1];
+				}
+			}
+			if(tempArr[maxIdx][1] != 0) {
+				System.out.printf("%d\t%s\t%d\n", tempArr[maxIdx][0], memberList.get(maxIdx).getcustname(), tempArr[maxIdx][1]);
+				System.out.println("--------------------------------");
+			}
+			tempArr[maxIdx][1] = -1;
+			j++;			
+		}
+	}
 }
 
 public class TestClass {
@@ -83,8 +129,12 @@ public class TestClass {
 		Manager mg = new Manager();
 		mg.init();
 		
+		mg.printSumOfPrice();
+		
+		
 		/*
-		   [문제] 아 래와 같이 출력  매출(price) 의 합계 + 내림차순 
+		   [문제] 아 래와 같이 출력  
+		   매출(price) 의 합계 + 내림차순 
 		  
 			100001	김행복		8000
 			--------------------------------
